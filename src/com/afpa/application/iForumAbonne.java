@@ -1,7 +1,6 @@
-package com.afpa.core;
+package com.afpa.application;
 
-public
-interface iForumModerateur
+interface iForumAbonne
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
@@ -9,11 +8,11 @@ interface iForumModerateur
 
     String getNom();
 
-    boolean supprimerNouvelle(Nouvelle n);
+    int getIndex(Nouvelle n);
 
-    void bannirUnAbonne(Abonne a);
+    boolean ajouterNouvelle(Nouvelle n);
 
-    int ajouterAbonne(Abonne a);
+    Nouvelle consulterNouvelle(int i);
 
-    void listerAbonnes();
+    void repondreNouvelle(int i, Personne auteur);
 }

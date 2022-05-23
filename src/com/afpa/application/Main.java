@@ -1,10 +1,5 @@
 package com.afpa.application;
 
-import com.afpa.core.Abonne;
-import com.afpa.core.Forum;
-import com.afpa.core.Moderateur;
-import com.afpa.core.Nouvelle;
-
 import static com.afpa.outil.Affichage.informativeWindow;
 
 public
@@ -61,7 +56,7 @@ class Main
         pierre.lireNouvelle(4);
         pierre.repondreNouvelle(n5);
 
-        /* Ne marche pas :
+        /* Ne marche pas grâce à l'abstraction fournie par les interfaces :
 
                 pierre.ajouterAbonne(ibrahim);
                 john. lireNouvelle(2);

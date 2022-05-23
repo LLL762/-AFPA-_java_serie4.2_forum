@@ -1,42 +1,44 @@
-package com.afpa.core;
+package com.afpa.application;
 
 import com.afpa.outil.Grade;
 
-public
-class Moderateur extends Personne
+import static com.afpa.outil.Affichage.informativeWindow;
+import static com.afpa.outil.Affichage.questionWindow;
+class Abonne extends Personne
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             VARIABLES                        */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    iForumModerateur forum;
-    Grade grade;
+    iForumAbonne forum;
+    private final Grade grade;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                           CONSTRUCTEUR                       */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-
-    public
-    Moderateur(String prenom, String nom, int age)
+    protected
+    Abonne(String prenom, String nom, int age)
     {
         super(prenom, nom, age);
         this.forum = null;
-        this.grade = Grade.MODERATEUR;
+        this.grade = Grade.ABONNE;
     }
 
-    public
-    Moderateur(String prenom, String nom, int age, Forum forum)
+    // Implémentation du constructeur possible avec un forum, actuellement non utilisée
+    /*
+    protected
+    Abonne(String prenom, String nom, int age, Forum forum)
     {
         super(prenom, nom, age);
         setForum(forum);
-        this.grade = Grade.MODERATEUR;
+        this.grade = Grade.ABONNE;
     }
+    */
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                         GETTER / SETTER                      */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    public
     void setForum(Forum forum)
     {
         this.forum = forum;
@@ -66,26 +68,46 @@ class Moderateur extends Personne
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    public
-    int ajouterAbonne(Abonne a)
+    // Possibilité de creer une nouvelle via une GUI, actuellement non utilisée
+    /*
+    protected
+    Nouvelle creerNouvelleGUI()
     {
-        return forum.ajouterAbonne(a);
+        return new Nouvelle(questionWindow("Entrer le titre de votre nouvelle", "titre_nouvelle"),
+                                  questionWindow("Entrer le texte de votre nouvelle", "texte_nouvelle"), this);
+    }
+    */
+    protected
+    Nouvelle creerNouvelle(String titre, String texte)
+    {
+        return new Nouvelle(titre, texte, this);
     }
 
-    public
-    void exclureAbonne(Abonne a)
+    protected
+    void deposerNouvelle(Nouvelle n)
     {
-        forum.bannirUnAbonne(a);
+        if (this.forum != null)
+        {
+            forum.ajouterNouvelle(n);
+        }
     }
 
-    public
-    void supprimerNouvelle(Nouvelle n)
+    protected
+    void lireNouvelle(int i)
     {
-        forum.supprimerNouvelle(n);
+        if (this.forum != null)
+        {
+            informativeWindow(forum.consulterNouvelle(i).toString(), String.format("article n°%d%n", i));
+        }
     }
 
-    public void afficherLesAbonnes()
+    protected
+    void repondreNouvelle(Nouvelle nvl)
     {
-        forum.listerAbonnes();
+        if (this.forum != null)
+        {
+            int index = forum.getIndex(nvl);
+            forum.repondreNouvelle(index, this);
+        }
     }
 }

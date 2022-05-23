@@ -1,4 +1,4 @@
-package com.afpa.core;
+package com.afpa.application;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,7 +6,6 @@ import java.util.Date;
 import static com.afpa.outil.Affichage.informativeWindow;
 import static com.afpa.outil.Affichage.questionWindow;
 
-public
 class Forum implements iForumAbonne, iForumModerateur
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -20,7 +19,7 @@ class Forum implements iForumAbonne, iForumModerateur
     /*                           CONSTRUCTEUR                       */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    public
+    protected
     Forum(String nom)
     {
         setNom(nom);
@@ -37,7 +36,7 @@ class Forum implements iForumAbonne, iForumModerateur
         return nom;
     }
 
-    public
+    protected
     void setNom(String nom)
     {
         if (!(nom.equals("")))
@@ -66,7 +65,7 @@ class Forum implements iForumAbonne, iForumModerateur
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    public
+    protected
     void listerMessages()
     {
         StringBuilder strListeMessage = new StringBuilder();

@@ -1,26 +1,29 @@
-package com.afpa.core;
+package com.afpa.application;
 
-public abstract
-class Personne
+import java.util.Date;
+
+class Nouvelle
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             VARIABLES                        */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    String prenom;
-    String nom;
-    int age;
+    String sujet;
+    String texte;
+    Date dateCreation;
+    Personne auteur;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                           CONSTRUCTEUR                       */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
     protected
-    Personne(String prenom, String nom, int age)
+    Nouvelle(String sujet, String texte, Personne auteur)
     {
-        this.prenom = prenom;
-        this.nom    = nom;
-        this.age    = age;
+        this.sujet        = sujet;
+        this.texte        = texte;
+        this.auteur       = auteur;
+        this.dateCreation = new Date();
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -35,13 +38,8 @@ class Personne
     public
     String toString()
     {
-        return String.format("Je suis %s %s. J'ai %d.", prenom, nom, age);
-    }
-
-    public
-    String toStringMetadata()
-    {
-        return String.format("%s %s", prenom, nom);
+        return String.format("-------------------%ntitre : '%s'%nnouvelle : %s%nauteur : %s%n-------------------%n",
+                             sujet, texte, auteur.toStringMetadata());
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
