@@ -2,6 +2,9 @@ package com.afpa.core;
 
 import com.afpa.outil.Grade;
 
+import static com.afpa.outil.Affichage.informativeWindow;
+import static com.afpa.outil.Affichage.questionWindow;
+
 public
 class Abonne extends Personne
 {
@@ -9,7 +12,7 @@ class Abonne extends Personne
     /*                             VARIABLES                        */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    Forum forum;
+    iForumAbonne forum;
     Grade grade;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -20,6 +23,15 @@ class Abonne extends Personne
     Abonne(String prenom, String nom, int age)
     {
         super(prenom, nom, age);
+        this.forum = null;
+        this.grade = Grade.ABONNE;
+    }
+
+    public
+    Abonne(String prenom, String nom, int age, Forum forum)
+    {
+        super(prenom, nom, age);
+        setForum(forum);
         this.grade = Grade.ABONNE;
     }
 
@@ -49,7 +61,7 @@ class Abonne extends Personne
         else
         {
             return String.format("Je suis %s %s. J'ai %d et je suis %s sur le forum %s.", prenom, nom, age,
-                                 grade.toString(), forum.nom);
+                                 grade.toString(), forum.getNom());
         }
     }
 
@@ -57,4 +69,46 @@ class Abonne extends Personne
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
+    public
+    Nouvelle creerNouvelleGUI()
+    {
+        Nouvelle n = new Nouvelle(questionWindow("Entrer le titre de votre nouvelle", "titre_nouvelle"),
+                                  questionWindow("Entrer le texte de votre nouvelle", "texte_nouvelle"), this);
+        return n;
+    }
+
+    public
+    Nouvelle creerNouvelle(String titre, String texte)
+    {
+        Nouvelle n = new Nouvelle(titre, texte, this);
+        return n;
+    }
+
+    public
+    void deposerNouvelle(Nouvelle n)
+    {
+        if (this.forum != null)
+        {
+            forum.ajouterNouvelle(n);
+        }
+    }
+
+    public
+    void lireNouvelle(int i)
+    {
+        if (this.forum != null)
+        {
+            informativeWindow( forum.consulterNouvelle(i).toString(), String.format("article n°%d%n",i));
+        }
+    }
+
+    public
+    void repondreNouvelle(Nouvelle nvl)
+    {
+        if (this.forum != null)
+        {
+            int index = forum.getIndex(nvl);
+            forum.repondreNouvelle(index, this);
+        }
+    }
 }

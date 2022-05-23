@@ -12,19 +12,20 @@ class Nouvelle
     String sujet;
     String texte;
     Date dateCreation;
+    Personne auteur;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                           CONSTRUCTEUR                       */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
     public
-    Nouvelle(String sujet, String texte)
+    Nouvelle(String sujet, String texte, Personne auteur)
     {
         this.sujet        = sujet;
         this.texte        = texte;
+        this.auteur       = auteur;
         this.dateCreation = new Date();
     }
-
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                         GETTER / SETTER                      */
@@ -38,8 +39,10 @@ class Nouvelle
     public
     String toString()
     {
-        return String.format("'%s' écrite le '%2$td %2$tB, %2$tY'%n%s", sujet, dateCreation, texte);
+        return String.format("-------------------%ntitre : '%s'%nnouvelle : %s%nauteur : %s%n-------------------%n",
+                             sujet, texte, auteur.toStringMetadata());
     }
+
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */

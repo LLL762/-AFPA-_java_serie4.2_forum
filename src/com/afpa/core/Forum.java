@@ -7,15 +7,12 @@ import static com.afpa.outil.Affichage.informativeWindow;
 import static com.afpa.outil.Affichage.questionWindow;
 
 public
-class Forum implements iAbonneForum, iModerateurForum
+class Forum implements iForumAbonne, iForumModerateur
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             VARIABLES                        */
-    /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-
-    String nom;
+    /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */ String nom;
     Date dateCreation;
-
     ArrayList<Nouvelle> listNouvelle = new ArrayList<>();
     ArrayList<Abonne> listAbonne = new ArrayList<>();
 
@@ -35,6 +32,12 @@ class Forum implements iAbonneForum, iModerateurForum
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
     public
+    String getNom()
+    {
+        return nom;
+    }
+
+    public
     void setNom(String nom)
     {
         if (!(nom.equals("")))
@@ -43,6 +46,11 @@ class Forum implements iAbonneForum, iModerateurForum
         }
     }
 
+    public
+    int getIndex(Nouvelle nvl)
+    {
+        return listNouvelle.indexOf(nvl);
+    }
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                    REDEFINITION DE TOSTRING()                */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -51,14 +59,27 @@ class Forum implements iAbonneForum, iModerateurForum
     public
     String toString()
     {
-        return String.format("Le forum '%s' a été créé le '%2$td %2$tB, %2$tY'%n", nom, dateCreation);
+        return String.format("Le forum '%s' a été créé le '%2$td %2$tB %2$tY'%n", nom, dateCreation);
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    // Implémentation abonnés
+    public
+    void listerMessages()
+    {
+        StringBuilder strListeMessage = new StringBuilder();
+
+        for (Nouvelle n : listNouvelle)
+        {
+            strListeMessage.append(n.toString()).append("\n");
+        }
+
+        informativeWindow(String.format("Liste messages :%n%n%s", strListeMessage), "liste_message");
+    }
+
+    // Implémentation droit abonnés
 
     @Override
     public
@@ -69,21 +90,23 @@ class Forum implements iAbonneForum, iModerateurForum
 
     @Override
     public
-    void consulterNouvelle(int i)
+    Nouvelle consulterNouvelle(int i)
     {
-        informativeWindow(this.listNouvelle.get(i).toString(), String.format("article num %s%n", i));
+        return listNouvelle.get(i);
     }
 
     @Override
     public
-    void repondreNouvelle(int i)
+    void repondreNouvelle(int i, Personne auteur)
     {
-        new Nouvelle(this.listNouvelle.get(i).sujet, questionWindow(
-                String.format("Entrer votre réponse au sujet '%s'.", this.listNouvelle.get(i).sujet), "Réponse"));
+
+        this.listNouvelle.add(new Nouvelle(this.listNouvelle.get(i).sujet, questionWindow(
+                String.format("Entrer votre réponse au sujet '%s'.", this.listNouvelle.get(i).sujet), "votre_réponse"),
+                                           auteur));
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-    // Implémentation modérateur
+    // Implémentation droit modérateur
 
     @Override
     public
@@ -96,6 +119,7 @@ class Forum implements iAbonneForum, iModerateurForum
     public
     void bannirUnAbonne(Abonne a)
     {
+        a.setForum(null);
         this.listAbonne.remove(a);
     }
 
@@ -112,13 +136,13 @@ class Forum implements iAbonneForum, iModerateurForum
     public
     void listerAbonnes()
     {
-        String strListeAbonne = "";
+        StringBuilder strListeAbonne = new StringBuilder();
 
-        for (Abonne a : this.listAbonne)
+        for (Abonne a : listAbonne)
         {
-            strListeAbonne.concat(a.toString() + "\n");
+            strListeAbonne.append(a.toStringMetadata()).append("\n");
         }
 
-        informativeWindow(String.format("Les abonnés sont :%n%n%s", strListeAbonne), "liste_abonnés");
+        informativeWindow(String.format("Les abonnés sont :%n%n%s", strListeAbonne.toString()), "liste_abonnés");
     }
 }

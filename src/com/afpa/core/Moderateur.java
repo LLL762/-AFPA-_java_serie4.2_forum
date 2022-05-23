@@ -9,7 +9,7 @@ class Moderateur extends Personne
     /*                             VARIABLES                        */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    Forum forum;
+    iForumModerateur forum;
     Grade grade;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -17,11 +17,19 @@ class Moderateur extends Personne
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
     public
+    Moderateur(String prenom, String nom, int age)
+    {
+        super(prenom, nom, age);
+        this.forum = null;
+        this.grade = Grade.MODERATEUR;
+    }
+
+    public
     Moderateur(String prenom, String nom, int age, Forum forum)
     {
         super(prenom, nom, age);
-        this.grade = Grade.MODERATEUR;
         setForum(forum);
+        this.grade = Grade.MODERATEUR;
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -50,11 +58,34 @@ class Moderateur extends Personne
         else
         {
             return String.format("Je suis %s %s. J'ai %d et je suis %s sur le forum %s.", prenom, nom, age,
-                                 grade.toString(), forum.nom);
+                                 grade.toString(), forum.getNom());
         }
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+
+    public
+    int ajouterAbonne(Abonne a)
+    {
+        return forum.ajouterAbonne(a);
+    }
+
+    public
+    void exclureAbonne(Abonne a)
+    {
+        forum.bannirUnAbonne(a);
+    }
+
+    public
+    void supprimerNouvelle(Nouvelle n)
+    {
+        forum.supprimerNouvelle(n);
+    }
+
+    public void afficherLesAbonnes()
+    {
+        forum.listerAbonnes();
+    }
 }

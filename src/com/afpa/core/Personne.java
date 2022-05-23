@@ -1,8 +1,6 @@
 package com.afpa.core;
 
-import com.afpa.outil.Grade;
-
-public
+public abstract
 class Personne
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -17,17 +15,12 @@ class Personne
     /*                           CONSTRUCTEUR                       */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    public
+    protected
     Personne(String prenom, String nom, int age)
     {
         this.prenom = prenom;
         this.nom    = nom;
         this.age    = age;
-    }
-
-    public
-    Personne()
-    {
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -43,6 +36,12 @@ class Personne
     String toString()
     {
         return String.format("Je suis %s %s. J'ai %d.", prenom, nom, age);
+    }
+
+    public
+    String toStringMetadata()
+    {
+        return String.format("%s %s", prenom, nom);
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
