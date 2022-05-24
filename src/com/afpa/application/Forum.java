@@ -6,7 +6,7 @@ import java.util.Date;
 import static com.afpa.outil.Affichage.informativeWindow;
 import static com.afpa.outil.Affichage.questionWindow;
 
-class Forum implements iForumAbonne, iForumModerateur
+class Forum implements IForumAbonne, IForumModerateur
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             VARIABLES                        */

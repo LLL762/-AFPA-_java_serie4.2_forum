@@ -1,6 +1,6 @@
 package com.afpa.application;
 
-interface iForumModerateur
+interface IForumModerateur
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */

@@ -8,7 +8,7 @@ class Moderateur extends Personne
     /*                             VARIABLES                        */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    iForumModerateur forum;
+    IForumModerateur forum;
     Grade grade;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */

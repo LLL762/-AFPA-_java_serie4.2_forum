@@ -10,7 +10,7 @@ class Abonne extends Personne
     /*                             VARIABLES                        */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    iForumAbonne forum;
+    IForumAbonne forum;
     Grade grade;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */

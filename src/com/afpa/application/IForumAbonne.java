@@ -1,6 +1,6 @@
 package com.afpa.application;
 
-interface iForumAbonne
+interface IForumAbonne
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
