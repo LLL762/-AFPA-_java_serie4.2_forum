@@ -30,8 +30,8 @@ class Abonne extends Personne
     Abonne ( String prenom, String nom, int age )
     {
         super ( prenom, nom, age );
-        this.forum = null;
-        this.grade = Grade.ABONNE;
+        this.forum         = null;
+        this.grade         = Grade.ABONNE;
         this.avertissement = 0;
 
     }
