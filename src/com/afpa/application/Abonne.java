@@ -12,6 +12,7 @@ class Abonne extends Personne
 
     IForumAbonne forum;
     Grade grade;
+    int avertissement;
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                           CONSTRUCTEUR                       */
@@ -31,6 +32,8 @@ class Abonne extends Personne
         super ( prenom, nom, age );
         this.forum = null;
         this.grade = Grade.ABONNE;
+        this.avertissement = 0;
+
     }
 
     /*

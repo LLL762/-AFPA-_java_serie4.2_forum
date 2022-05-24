@@ -11,6 +11,8 @@ interface IForumModerateur
 
     void bannirUnAbonne ( Abonne abonne );
 
+    void avertirUnAbonne ( Abonne abonne );
+
     int ajouterAbonne ( Abonne abonne );
 
     void listerAbonnes ();

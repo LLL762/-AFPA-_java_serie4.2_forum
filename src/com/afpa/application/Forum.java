@@ -181,6 +181,17 @@ class Forum implements IForumAbonne, IForumModerateur
         this.listAbonne.remove ( abonne );
     }
 
+    @Override
+    public
+    void avertirUnAbonne ( Abonne abonne )
+    {
+        abonne.avertissement += 1;
+        if ( abonne.avertissement > 3 )
+        {
+            bannirUnAbonne ( abonne );
+        }
+    }
+
     /**
      * Ajouter un abonné au forum
      *
