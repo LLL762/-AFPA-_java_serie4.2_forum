@@ -9,16 +9,16 @@ class Main
     void main ( String[] args )
     {
 
-        /*  - Instanciation forum    -   -   -   -   -   -   -   -   -   */
-
+        /*  Instanciation forum
+        /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
         Forum forum = new Forum ( "$pread-it" );
         /*  version avec saisi utilisateur :
          *  Forum forum = new Forum(questionWindow("Entrer le nom du forum", "forum_name_request"));
          */
 
 
-        /*  - Instanciation abonnés -   -   -   -   -   -   -   -   -   */
-
+        /*  Instanciation abonné
+        /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
         Abonne jean    = new Abonne ( "Jean", "Steam", 31 );
         Abonne pierre  = new Abonne ( "Pierre", "Upright", 28 );
         Abonne patrick = new Abonne ( "Patrick", "Regular", 38 );
@@ -27,14 +27,14 @@ class Main
         informativeWindow ( jean.toString (), "test_abo" );                 //Affichage test
 
 
-        /*  - Instanciation modérateur  -   -   -   -   -   -   -   -   */
-
+        /*  Instanciation modérateur
+        /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
         Moderateur john = new Moderateur ( "John", "Do", 31, forum );
         informativeWindow ( john.toString (), "test_modo" );                //Affichage test
 
 
-        /*  - Ajout des abonnées au forum par le modo   -   -   -   -   */
-
+        /*  Ajout des abonnées au forum par le modo
+        /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
         john.ajouterAbonne ( jean );
         john.ajouterAbonne ( pierre );
         john.ajouterAbonne ( patrick );
@@ -44,8 +44,8 @@ class Main
         john.afficherLesAbonnes ();
 
 
-        /*  - Création des nouvelles    -   -   -   -   -   -   -   -   */
-
+        /*  Création des nouvelles
+        /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
         Nouvelle n1 = jean.creerNouvelle ( "Ago Yesterday Not", "Perform, Could, Educate, Favor, Rust" );
         jean.deposerNouvelle ( n1 );
         Nouvelle n2 = pierre.creerNouvelle ( "SandMountain Elastic", "Earth, Kill, Star, Escape, Cut" );
@@ -58,8 +58,8 @@ class Main
         ibrahim.deposerNouvelle ( n5 );
 
 
-        /*  - Test de lecture et de réponse -   -   -   -   -   -   -   */
-
+        /*  Test de lecture et de réponse
+        /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
         mickael.lireNouvelle ( 2 );
         mickael.repondreNouvelle ( n3 );
         /*  Ne marche pas grâce à l'abstraction fournie par les interfaces :
