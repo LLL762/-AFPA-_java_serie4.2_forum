@@ -1,15 +1,17 @@
 package com.afpa.application;
 
-public
 interface iForumModerateur
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-    String getNom();
-    boolean supprimerNouvelle( Nouvelle n );
+    String getNom ();
 
-    void bannirUnAbonne( Abonne a );
-    int ajouterAbonne( Abonne a );
-    void listerAbonnes();
+    void supprimerNouvelle ( Nouvelle nouvelle );
+
+    void bannirUnAbonne ( Abonne abonne );
+
+    int ajouterAbonne ( Abonne abonne );
+
+    void listerAbonnes ();
 }

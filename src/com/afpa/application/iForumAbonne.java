@@ -6,13 +6,13 @@ interface iForumAbonne
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    String getNom();
+    String getNom ();
 
-    int getIndex(Nouvelle n);
+    int getIndex ( Nouvelle nouvelle );
 
-    boolean ajouterNouvelle(Nouvelle n);
+    void ajouterNouvelle ( Nouvelle nouvelle );
 
-    Nouvelle consulterNouvelle(int i);
+    Nouvelle consulterNouvelle ( int index );
 
-    void repondreNouvelle(int i, Personne auteur);
+    void repondreNouvelle ( int index, Personne auteur );
 }

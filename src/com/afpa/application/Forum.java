@@ -10,138 +10,206 @@ class Forum implements iForumAbonne, iForumModerateur
 {
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             VARIABLES                        */
-    /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */ String nom;
+    /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+
+    String nom;
     Date dateCreation;
-    ArrayList<Nouvelle> listNouvelle = new ArrayList<>();
-    ArrayList<Abonne> listAbonne = new ArrayList<>();
+    ArrayList< Nouvelle > listNouvelle = new ArrayList<> ();
+    ArrayList< Abonne > listAbonne = new ArrayList<> ();
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                           CONSTRUCTEUR                       */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
+    /**
+     * Constructeur de la classe forum, assigne la date d'aujourd'hui pour la création
+     *
+     * @param nom Le nom du forum
+     */
     protected
-    Forum(String nom)
+    Forum ( String nom )
     {
-        setNom(nom);
-        this.dateCreation = new Date();
+        setNom ( nom );
+        this.dateCreation = new Date ();
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                         GETTER / SETTER                      */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
+    /**
+     * getter sur le nom du forum
+     *
+     * @return Le nom du forum en String
+     */
     public
-    String getNom()
+    String getNom ()
     {
         return nom;
     }
 
+    /**
+     * Setter pour le nom du forum, vérifie qu'il n'est pas nul et met en lower case
+     *
+     * @param nom Le nom à donner au forum
+     */
     protected
-    void setNom(String nom)
+    void setNom ( String nom )
     {
-        if (!(nom.equals("")))
+        if ( !( nom.equals ( "" ) ) )
         {
-            this.nom = nom.trim().toUpperCase();
+            this.nom = nom.trim ().toUpperCase ();
         }
     }
 
+    /**
+     * getter sur la liste des nouvelles qui renvoie l'index d'une nouvelle passée en paramètre
+     *
+     * @param nouvelle La nouvelle a rechercher dans la liste des nouvelle pour recuperer son index
+     * @return L'index de position de la nouvelle
+     */
     public
-    int getIndex(Nouvelle nvl)
+    int getIndex ( Nouvelle nouvelle )
     {
-        return listNouvelle.indexOf(nvl);
+        return listNouvelle.indexOf ( nouvelle );
     }
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                    REDEFINITION DE TOSTRING()                */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
+    /**
+     * Redefinition de toString()
+     *
+     * @return Une présentation du forum avec nom et date de création sous forme de String
+     */
     @Override
     public
-    String toString()
+    String toString ()
     {
-        return String.format("Le forum '%s' a été créé le '%2$td %2$tB %2$tY'%n", nom, dateCreation);
+        return String.format ( "Le forum '%s' a été créé le '%2$td %2$tB %2$tY'%n", nom, dateCreation );
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
+    /**
+     * Permet d'afficher une liste des messages présent sur le forum.
+     * Fait appel à toStrong() de Nouvelle
+     */
     protected
-    void listerMessages()
+    void listerMessages ()
     {
-        StringBuilder strListeMessage = new StringBuilder();
+        StringBuilder strListeMessage = new StringBuilder ();
 
-        for (Nouvelle n : listNouvelle)
+        for ( Nouvelle nouvelle : listNouvelle )
         {
-            strListeMessage.append(n.toString()).append("\n");
+            strListeMessage.append ( nouvelle.toString () ).append ( "\n" );
         }
 
-        informativeWindow(String.format("Liste messages :%n%n%s", strListeMessage), "liste_message");
+        informativeWindow ( String.format ( "Liste messages :%n%n%s", strListeMessage ), "liste_message" );
     }
 
-    // Implémentation droit abonnés
+    /*  -  Implémentation des droits abonnés    -   -   -   -   -   */
 
+    /**
+     * Ajoute une nouvelle à la liste-stockage du forum
+     *
+     * @param nouvelle La nouvelle à ajouter au stockage du forum
+     */
     @Override
     public
-    boolean ajouterNouvelle(Nouvelle n)
+    void ajouterNouvelle ( Nouvelle nouvelle )
     {
-        return this.listNouvelle.add(n);
+        this.listNouvelle.add ( nouvelle );
     }
 
+    /**
+     * Permet de consulter situé à 'index' dans la liste-stockage du forum
+     *
+     * @param index l'index de la nouvelle à afficher
+     * @return La nouvelle située à l'index
+     */
     @Override
     public
-    Nouvelle consulterNouvelle(int i)
+    Nouvelle consulterNouvelle ( int index )
     {
-        return listNouvelle.get(i);
+        return listNouvelle.get ( index );
     }
 
+    /**
+     * Créé une nouvelle dans la liste-stockage du forum en réponse à celle située à Index
+     * Le titre sera donc le même.
+     *
+     * @param index  La position de la nouvelle d'origine à laquelle on souhaite répondre
+     * @param auteur L'auteur de la réponse pour la création de la nouvelle-réponse
+     */
     @Override
     public
-    void repondreNouvelle(int i, Personne auteur)
+    void repondreNouvelle ( int index, Personne auteur )
     {
-
-        this.listNouvelle.add(new Nouvelle(this.listNouvelle.get(i).sujet, questionWindow(
-                String.format("Entrer votre réponse au sujet '%s'.", this.listNouvelle.get(i).sujet), "votre_réponse"),
-                                           auteur));
+        this.listNouvelle.add ( new Nouvelle ( this.listNouvelle.get ( index ).sujet, questionWindow (
+                String.format ( "Entrer votre réponse au sujet '%s'.", this.listNouvelle.get ( index ).sujet ),
+                "votre_réponse" ), auteur ) );
     }
 
-    /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-    // Implémentation droit modérateur
+    /*  -  Implémentation des droits modérateur -   -   -   -   -   */
 
+    /**
+     * Supprime la nouvvelle passée en parametre de la liste-stockage du forum
+     *
+     * @param nouvelle La nouvelle à supprimer
+     */
     @Override
     public
-    boolean supprimerNouvelle(Nouvelle n)
+    void supprimerNouvelle ( Nouvelle nouvelle )
     {
-        return this.listNouvelle.remove(n);
+        this.listNouvelle.remove ( nouvelle );
     }
 
+    /**
+     * Permet de bannir un abonné du forum
+     * pour cela, lui supprime son attribut forum et le supprime de la liste-stockage des abonnés du forum
+     *
+     * @param abonne L'abonné à bannir
+     */
     @Override
     public
-    void bannirUnAbonne(Abonne a)
+    void bannirUnAbonne ( Abonne abonne )
     {
-        a.setForum(null);
-        this.listAbonne.remove(a);
+        abonne.setForum ( null );
+        this.listAbonne.remove ( abonne );
     }
 
+    /**
+     * Ajouter un abonné au forum
+     *
+     * @param abonne L'abonné à ajouter au forum
+     * @return L'index de position de l'abonné dans la liste-stockage des abonnés du forum
+     */
     @Override
     public
-    int ajouterAbonne(Abonne a)
+    int ajouterAbonne ( Abonne abonne )
     {
-        this.listAbonne.add(a);
-        a.forum = this;
-        return this.listAbonne.indexOf(a);
+        this.listAbonne.add ( abonne );
+        abonne.forum = this;
+        return this.listAbonne.indexOf ( abonne );
     }
 
+    /**
+     * Affichage des abonnées du forum via le toStringShort d'abonne
+     */
     @Override
     public
-    void listerAbonnes()
+    void listerAbonnes ()
     {
-        StringBuilder strListeAbonne = new StringBuilder();
+        StringBuilder strListeAbonne = new StringBuilder ();
 
-        for (Abonne a : listAbonne)
+        for ( Abonne abonne : listAbonne )
         {
-            strListeAbonne.append(a.toStringMetadata()).append("\n");
+            strListeAbonne.append ( abonne.toStringShort () ).append ( "\n" );
         }
 
-        informativeWindow(String.format("Les abonnés sont :%n%n%s", strListeAbonne.toString()), "liste_abonnés");
+        informativeWindow ( String.format ( "Les abonnés sont :%n%n%s", strListeAbonne ), "liste_abonnés" );
     }
 }
