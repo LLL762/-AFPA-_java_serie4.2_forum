@@ -104,7 +104,25 @@ class Moderateur extends Personne
     protected
     int ajouterAbonne ( Abonne abonne )
     {
-        return forum.ajouterAbonne ( abonne );
+        if ( this.forum != null )
+        {
+            return forum.ajouterAbonne ( abonne );
+        }
+        return -1;
+    }
+
+    /**
+     * Avertir un abonné sur le forum du modérateur
+     *
+     * @param abonne L'abonné à avertir sur le forum du modérateur
+     */
+    protected
+    void avertirAbonne ( Abonne abonne )
+    {
+        if ( this.forum != null )
+        {
+            forum.avertirUnAbonne ( abonne );
+        }
     }
 
     /**
@@ -115,7 +133,10 @@ class Moderateur extends Personne
     protected
     void exclureAbonne ( Abonne abonne )
     {
-        forum.bannirUnAbonne ( abonne );
+        if ( this.forum != null )
+        {
+            forum.bannirUnAbonne ( abonne );
+        }
     }
 
     /**
@@ -126,7 +147,10 @@ class Moderateur extends Personne
     protected
     void supprimerNouvelle ( Nouvelle nouvelle )
     {
-        forum.supprimerNouvelle ( nouvelle );
+        if ( this.forum != null )
+        {
+            forum.supprimerNouvelle ( nouvelle );
+        }
     }
 
     /**
@@ -135,6 +159,9 @@ class Moderateur extends Personne
     protected
     void afficherLesAbonnes ()
     {
-        forum.listerAbonnes ();
+        if ( this.forum != null )
+        {
+            forum.listerAbonnes ();
+        }
     }
 }

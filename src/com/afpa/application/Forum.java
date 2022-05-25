@@ -148,9 +148,16 @@ class Forum implements IForumAbonne, IForumModerateur
     public
     void repondreNouvelle ( int index, Personne auteur )
     {
-        this.listNouvelle.add ( new Nouvelle ( this.listNouvelle.get ( index ).sujet, questionWindow (
-                String.format ( "Entrer votre réponse au sujet '%s'.", this.listNouvelle.get ( index ).sujet ),
-                "votre_réponse" ), auteur ) );
+        if ( listAbonne.contains ( auteur ) )
+        {
+            this.listNouvelle.add ( new Nouvelle ( this.listNouvelle.get ( index ).sujet, questionWindow (
+                    String.format ( "Entrer votre réponse au sujet '%s'.", this.listNouvelle.get ( index ).sujet ),
+                    "votre_réponse" ), auteur ) );
+        }
+        else
+        {
+            System.out.printf ( "L'auteur %s n'est pas membre du forum %s%n", auteur.toStringShort (), this.nom );
+        }
     }
 
     /*  -  Implémentation des droits modérateur -   -   -   -   -   */
@@ -177,18 +184,36 @@ class Forum implements IForumAbonne, IForumModerateur
     public
     void bannirUnAbonne ( Abonne abonne )
     {
-        abonne.setForum ( null );
-        this.listAbonne.remove ( abonne );
+        if ( listAbonne.contains ( abonne ) )
+        {
+            System.out.printf ( "L'abonne %s a ete banni..%n", abonne.toStringShort () );
+            abonne.setForum ( null );
+            abonne.avertissement = 0;
+            this.listAbonne.remove ( abonne );
+        }
+        else
+        {
+            System.out.printf ( "L'abonne %s n'est pas membre du forum %s%n", abonne.toStringShort (), this.nom );
+        }
     }
 
     @Override
     public
     void avertirUnAbonne ( Abonne abonne )
     {
-        abonne.avertissement += 1;
-        if ( abonne.avertissement > 3 )
+        if ( listAbonne.contains ( abonne ) )
         {
-            bannirUnAbonne ( abonne );
+            abonne.avertissement += 1;
+            System.out.printf ( "L'abonne %s a ete averti. Ca lui fait %d avertissement(s)%n", abonne.toStringShort (),
+                                abonne.avertissement );
+            if ( abonne.avertissement > 2 )
+            {
+                bannirUnAbonne ( abonne );
+            }
+        }
+        else
+        {
+            System.out.printf ( "L'abonne %s n'est pas membre du forum %s%n", abonne.toStringShort (), this.nom );
         }
     }
 
@@ -196,15 +221,23 @@ class Forum implements IForumAbonne, IForumModerateur
      * Ajouter un abonné au forum
      *
      * @param abonne L'abonné à ajouter au forum
-     * @return L'index de position de l'abonné dans la liste-stockage des abonnés du forum
+     * @return L'index de position de l'abonné dans la liste-stockage des abonnés du forum, -1 si échec
      */
     @Override
     public
     int ajouterAbonne ( Abonne abonne )
     {
-        this.listAbonne.add ( abonne );
-        abonne.forum = this;
-        return this.listAbonne.indexOf ( abonne );
+        if ( !( listAbonne.contains ( abonne ) ) )
+        {
+            this.listAbonne.add ( abonne );
+            abonne.forum = this;
+            return this.listAbonne.indexOf ( abonne );
+        }
+        else
+        {
+            System.out.printf ( "L'abonne %s est deja membre du forum %s%n", abonne.toStringShort (), this.nom );
+            return -1;
+        }
     }
 
     /**

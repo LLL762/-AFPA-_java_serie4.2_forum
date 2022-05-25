@@ -11,7 +11,7 @@ class Main
 
         /*  Instanciation forum
         /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-        Forum forum = new Forum ( "$pread-it" );
+        Forum forum = new Forum ( "read-it" );
         /*  version avec saisi utilisateur :
          *  Forum forum = new Forum(questionWindow("Entrer le nom du forum", "forum_name_request"));
          */
@@ -65,10 +65,24 @@ class Main
         /*  Ne marche pas grâce à l'abstraction fournie par les interfaces :
          *
          *      pierre.ajouterAbonne(ibrahim);
-         *      john. lireNouvelle(2);
+         *      john.lireNouvelle(2);
          */
 
         forum.listerMessages ();
+
+        /*  Test des fonctions modérateurs
+        /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+        john.avertirAbonne ( patrick );
+        john.avertirAbonne ( patrick );
+        john.avertirAbonne ( patrick ); // 3 avertissements entrainent un ban
+
+        john.avertirAbonne ( patrick ); // avertir un abonné non membre du forum
+
+        john.exclureAbonne ( patrick ); // exclure un abonné non membre du forum
+
+        john.ajouterAbonne ( jean );    // ajouter un abonné deja membre du forum
+
+        john.afficherLesAbonnes ();
 
         informativeWindow ( forum.toString (), "info_forum" );
     }
