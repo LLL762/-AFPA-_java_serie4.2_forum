@@ -99,7 +99,7 @@ class Abonne extends Personne
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-    /*  Possibilité de creer une nouvelle via une GUI, actuellement non utilisée
+    /*  Possibilité de créer une nouvelle via une GUI, actuellement non utilisée
      *
      * @return
      *
@@ -114,12 +114,12 @@ class Abonne extends Personne
      */
 
     /**
-     * Creer une nouvelle, utilise le constructeur de la classe Nouvelle
+     * Créer une nouvelle, utilise le constructeur de la classe Nouvelle
      *
      * @param titre Le titre de la nouvelle
      * @param texte Le contenu de la nouvelle
      *
-     * @return
+     * @return La nouvelle ici créée
      */
     protected
     Nouvelle creerNouvelle( String titre, String texte )
@@ -142,9 +142,9 @@ class Abonne extends Personne
     }
 
     /**
-     * Lire la nouvelle situé à 'index' dans le forum.( Créé une fenetre )
+     * Lire la nouvelle située à 'index' dans le forum.(Créé une fenêtre)
      *
-     * @param index
+     * @param index L'index de l'élément dans la liste que l'on veut récupérer
      */
     protected
     void lireNouvelle( int index )
@@ -156,9 +156,9 @@ class Abonne extends Personne
     }
 
     /**
-     * Répondre à une nouvelle. Pour cela, on question le forum pour avoir l'index de celle ci
+     * Répondre à une nouvelle. Pour cela, on questionne le forum pour avoir l'index de celle ci
      *
-     * @param nouvelle La nouvelle à laquel on souhaite répondre
+     * @param nouvelle La nouvelle à laquelle on souhaite répondre
      */
     protected
     void repondreNouvelle( Nouvelle nouvelle )

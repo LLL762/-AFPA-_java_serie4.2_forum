@@ -100,7 +100,7 @@ class Moderateur extends Personne
      *
      * @param abonne L'abonné à ajouter au forum du modérateur
      *
-     * @return
+     * @return L'index auquel se trouve l'abonné dans la liste de stockage. (-1 si échec)
      */
     protected
     int ajouterAbonne( Abonne abonne )

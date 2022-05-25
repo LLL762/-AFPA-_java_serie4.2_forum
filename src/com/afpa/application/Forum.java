@@ -65,7 +65,7 @@ class Forum implements IForumAbonne, IForumModerateur
     /**
      * getter sur la liste des nouvelles qui renvoie l'index d'une nouvelle passée en paramètre
      *
-     * @param nouvelle La nouvelle a rechercher dans la liste des nouvelle pour recuperer son index
+     * @param nouvelle La nouvelle à rechercher dans la liste des nouvelles pour récupérer son index
      *
      * @return L'index de position de la nouvelle
      */
@@ -95,7 +95,7 @@ class Forum implements IForumAbonne, IForumModerateur
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
     /**
-     * Permet d'afficher une liste des messages présent sur le forum.
+     * Permet d'afficher une liste des messages présents sur le forum.
      * Fait appel à toStrong() de Nouvelle
      */
     protected
@@ -165,7 +165,7 @@ class Forum implements IForumAbonne, IForumModerateur
     /*  -  Implémentation des droits modérateur -   -   -   -   -   */
 
     /**
-     * Supprime la nouvvelle passée en parametre de la liste-stockage du forum
+     * Supprime la nouvelle passée en paramètre de la liste-stockage du forum
      *
      * @param nouvelle La nouvelle à supprimer
      */
@@ -244,7 +244,7 @@ class Forum implements IForumAbonne, IForumModerateur
     }
 
     /**
-     * Affichage des abonnées du forum via le toStringShort d'abonne
+     * Affichage des abonnées du forum via le toStringShort d'abonné
      */
     @Override
     public
