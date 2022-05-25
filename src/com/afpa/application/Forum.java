@@ -14,8 +14,8 @@ class Forum implements IForumAbonne, IForumModerateur
 
     String nom;
     Date dateCreation;
-    ArrayList< Nouvelle > listNouvelle = new ArrayList<> ();
-    ArrayList< Abonne > listAbonne = new ArrayList<> ();
+    ArrayList< Nouvelle > listNouvelle = new ArrayList<>();
+    ArrayList< Abonne > listAbonne = new ArrayList<>();
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                           CONSTRUCTEUR                       */
@@ -27,10 +27,10 @@ class Forum implements IForumAbonne, IForumModerateur
      * @param nom Le nom du forum
      */
     protected
-    Forum ( String nom )
+    Forum( String nom )
     {
-        setNom ( nom );
-        this.dateCreation = new Date ();
+        setNom( nom );
+        this.dateCreation = new Date();
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -43,7 +43,7 @@ class Forum implements IForumAbonne, IForumModerateur
      * @return Le nom du forum en String
      */
     public
-    String getNom ()
+    String getNom()
     {
         return nom;
     }
@@ -54,11 +54,11 @@ class Forum implements IForumAbonne, IForumModerateur
      * @param nom Le nom à donner au forum
      */
     protected
-    void setNom ( String nom )
+    void setNom( String nom )
     {
-        if ( !( nom.equals ( "" ) ) )
+        if ( ! ( nom.equals( "" ) ) )
         {
-            this.nom = nom.trim ().toUpperCase ();
+            this.nom = nom.trim().toUpperCase();
         }
     }
 
@@ -66,12 +66,13 @@ class Forum implements IForumAbonne, IForumModerateur
      * getter sur la liste des nouvelles qui renvoie l'index d'une nouvelle passée en paramètre
      *
      * @param nouvelle La nouvelle a rechercher dans la liste des nouvelle pour recuperer son index
+     *
      * @return L'index de position de la nouvelle
      */
     public
-    int getIndex ( Nouvelle nouvelle )
+    int getIndex( Nouvelle nouvelle )
     {
-        return listNouvelle.indexOf ( nouvelle );
+        return listNouvelle.indexOf( nouvelle );
     }
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                    REDEFINITION DE TOSTRING()                */
@@ -84,9 +85,9 @@ class Forum implements IForumAbonne, IForumModerateur
      */
     @Override
     public
-    String toString ()
+    String toString()
     {
-        return String.format ( "Le forum '%s' a été créé le '%2$td %2$tB %2$tY'%n", nom, dateCreation );
+        return String.format( "Le forum '%s' a été créé le '%2$td %2$tB %2$tY'%n", nom, dateCreation );
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -98,16 +99,16 @@ class Forum implements IForumAbonne, IForumModerateur
      * Fait appel à toStrong() de Nouvelle
      */
     protected
-    void listerMessages ()
+    void listerMessages()
     {
-        StringBuilder strListeMessage = new StringBuilder ();
+        StringBuilder strListeMessage = new StringBuilder();
 
         for ( Nouvelle nouvelle : listNouvelle )
         {
-            strListeMessage.append ( nouvelle.toString () ).append ( "\n" );
+            strListeMessage.append( nouvelle.toString() ).append( "\n" );
         }
 
-        informativeWindow ( String.format ( "Liste messages :%n%n%s", strListeMessage ), "liste_message" );
+        informativeWindow( String.format( "Liste messages :%n%n%s", strListeMessage ), "liste_message" );
     }
 
     /*  -  Implémentation des droits abonnés    -   -   -   -   -   */
@@ -119,22 +120,23 @@ class Forum implements IForumAbonne, IForumModerateur
      */
     @Override
     public
-    void ajouterNouvelle ( Nouvelle nouvelle )
+    void ajouterNouvelle( Nouvelle nouvelle )
     {
-        this.listNouvelle.add ( nouvelle );
+        this.listNouvelle.add( nouvelle );
     }
 
     /**
      * Permet de consulter situé à 'index' dans la liste-stockage du forum
      *
      * @param index l'index de la nouvelle à afficher
+     *
      * @return La nouvelle située à l'index
      */
     @Override
     public
-    Nouvelle consulterNouvelle ( int index )
+    Nouvelle consulterNouvelle( int index )
     {
-        return listNouvelle.get ( index );
+        return listNouvelle.get( index );
     }
 
     /**
@@ -146,17 +148,17 @@ class Forum implements IForumAbonne, IForumModerateur
      */
     @Override
     public
-    void repondreNouvelle ( int index, Personne auteur )
+    void repondreNouvelle( int index, Personne auteur )
     {
-        if ( listAbonne.contains ( auteur ) )
+        if ( listAbonne.contains( auteur ) )
         {
-            this.listNouvelle.add ( new Nouvelle ( this.listNouvelle.get ( index ).sujet, questionWindow (
-                    String.format ( "Entrer votre réponse au sujet '%s'.", this.listNouvelle.get ( index ).sujet ),
+            this.listNouvelle.add( new Nouvelle( this.listNouvelle.get( index ).sujet, questionWindow(
+                    String.format( "Entrer votre réponse au sujet '%s'.", this.listNouvelle.get( index ).sujet ),
                     "votre_réponse" ), auteur ) );
         }
         else
         {
-            System.out.printf ( "L'auteur %s n'est pas membre du forum %s%n", auteur.toStringShort (), this.nom );
+            System.out.printf( "L'auteur %s n'est pas membre du forum %s%n", auteur.toStringShort(), this.nom );
         }
     }
 
@@ -169,9 +171,9 @@ class Forum implements IForumAbonne, IForumModerateur
      */
     @Override
     public
-    void supprimerNouvelle ( Nouvelle nouvelle )
+    void supprimerNouvelle( Nouvelle nouvelle )
     {
-        this.listNouvelle.remove ( nouvelle );
+        this.listNouvelle.remove( nouvelle );
     }
 
     /**
@@ -182,38 +184,38 @@ class Forum implements IForumAbonne, IForumModerateur
      */
     @Override
     public
-    void bannirUnAbonne ( Abonne abonne )
+    void bannirUnAbonne( Abonne abonne )
     {
-        if ( listAbonne.contains ( abonne ) )
+        if ( listAbonne.contains( abonne ) )
         {
-            System.out.printf ( "L'abonne %s a ete banni..%n", abonne.toStringShort () );
-            abonne.setForum ( null );
+            System.out.printf( "L'abonne %s a ete banni..%n", abonne.toStringShort() );
+            abonne.setForum( null );
             abonne.avertissement = 0;
-            this.listAbonne.remove ( abonne );
+            this.listAbonne.remove( abonne );
         }
         else
         {
-            System.out.printf ( "L'abonne %s n'est pas membre du forum %s%n", abonne.toStringShort (), this.nom );
+            System.out.printf( "L'abonne %s n'est pas membre du forum %s%n", abonne.toStringShort(), this.nom );
         }
     }
 
     @Override
     public
-    void avertirUnAbonne ( Abonne abonne )
+    void avertirUnAbonne( Abonne abonne )
     {
-        if ( listAbonne.contains ( abonne ) )
+        if ( listAbonne.contains( abonne ) )
         {
             abonne.avertissement += 1;
-            System.out.printf ( "L'abonne %s a ete averti. Ca lui fait %d avertissement(s)%n", abonne.toStringShort (),
-                                abonne.avertissement );
+            System.out.printf( "L'abonne %s a ete averti. Ca lui fait %d avertissement(s)%n", abonne.toStringShort(),
+                               abonne.avertissement );
             if ( abonne.avertissement > 2 )
             {
-                bannirUnAbonne ( abonne );
+                bannirUnAbonne( abonne );
             }
         }
         else
         {
-            System.out.printf ( "L'abonne %s n'est pas membre du forum %s%n", abonne.toStringShort (), this.nom );
+            System.out.printf( "L'abonne %s n'est pas membre du forum %s%n", abonne.toStringShort(), this.nom );
         }
     }
 
@@ -221,22 +223,23 @@ class Forum implements IForumAbonne, IForumModerateur
      * Ajouter un abonné au forum
      *
      * @param abonne L'abonné à ajouter au forum
+     *
      * @return L'index de position de l'abonné dans la liste-stockage des abonnés du forum, -1 si échec
      */
     @Override
     public
-    int ajouterAbonne ( Abonne abonne )
+    int ajouterAbonne( Abonne abonne )
     {
-        if ( !( listAbonne.contains ( abonne ) ) )
+        if ( ! ( listAbonne.contains( abonne ) ) )
         {
-            this.listAbonne.add ( abonne );
+            this.listAbonne.add( abonne );
             abonne.forum = this;
-            return this.listAbonne.indexOf ( abonne );
+            return this.listAbonne.indexOf( abonne );
         }
         else
         {
-            System.out.printf ( "L'abonne %s est deja membre du forum %s%n", abonne.toStringShort (), this.nom );
-            return -1;
+            System.out.printf( "L'abonne %s est deja membre du forum %s%n", abonne.toStringShort(), this.nom );
+            return - 1;
         }
     }
 
@@ -245,15 +248,15 @@ class Forum implements IForumAbonne, IForumModerateur
      */
     @Override
     public
-    void listerAbonnes ()
+    void listerAbonnes()
     {
-        StringBuilder strListeAbonne = new StringBuilder ();
+        StringBuilder strListeAbonne = new StringBuilder();
 
         for ( Abonne abonne : listAbonne )
         {
-            strListeAbonne.append ( abonne.toStringShort () ).append ( "\n" );
+            strListeAbonne.append( abonne.toStringShort() ).append( "\n" );
         }
 
-        informativeWindow ( String.format ( "Les abonnés sont :%n%n%s", strListeAbonne ), "liste_abonnés" );
+        informativeWindow( String.format( "Les abonnés sont :%n%n%s", strListeAbonne ), "liste_abonnés" );
     }
 }

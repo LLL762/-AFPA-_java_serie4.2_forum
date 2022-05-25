@@ -5,15 +5,15 @@ interface IForumModerateur
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
     /*                             METHODES                         */
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-    String getNom ();
+    String getNom();
 
-    void supprimerNouvelle ( Nouvelle nouvelle );
+    void supprimerNouvelle( Nouvelle nouvelle );
 
-    void bannirUnAbonne ( Abonne abonne );
+    void bannirUnAbonne( Abonne abonne );
 
-    void avertirUnAbonne ( Abonne abonne );
+    void avertirUnAbonne( Abonne abonne );
 
-    int ajouterAbonne ( Abonne abonne );
+    int ajouterAbonne( Abonne abonne );
 
-    void listerAbonnes ();
+    void listerAbonnes();
 }

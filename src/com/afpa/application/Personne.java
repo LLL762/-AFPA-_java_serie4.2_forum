@@ -23,7 +23,7 @@ class Personne
      * @param age    L'âge à assigner à la personne
      */
     protected
-    Personne ( String prenom, String nom, int age )
+    Personne( String prenom, String nom, int age )
     {
         this.prenom = prenom;
         this.nom    = nom;
@@ -45,9 +45,9 @@ class Personne
      */
     @Override
     public
-    String toString ()
+    String toString()
     {
-        return String.format ( "Je suis %s %s. J'ai %d.", prenom, nom, age );
+        return String.format( "Je suis %s %s. J'ai %d.", prenom, nom, age );
     }
 
     /**
@@ -56,9 +56,9 @@ class Personne
      * @return Une présentation courte de la personne sous forme de String
      */
     public
-    String toStringShort ()
+    String toStringShort()
     {
-        return String.format ( "%s %s", prenom, nom );
+        return String.format( "%s %s", prenom, nom );
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */

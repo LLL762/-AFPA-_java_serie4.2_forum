@@ -27,9 +27,9 @@ class Abonne extends Personne
      * @param age    L'âge à assigner à l'abonné
      */
     protected
-    Abonne ( String prenom, String nom, int age )
+    Abonne( String prenom, String nom, int age )
     {
-        super ( prenom, nom, age );
+        super( prenom, nom, age );
         this.forum         = null;
         this.grade         = Grade.ABONNE;
         this.avertissement = 0;
@@ -65,7 +65,7 @@ class Abonne extends Personne
      * @param forum Le forum à assigner à l'objet abonné
      */
     protected
-    void setForum ( Forum forum )
+    void setForum( Forum forum )
     {
         this.forum = forum;
     }
@@ -81,17 +81,17 @@ class Abonne extends Personne
      */
     @Override
     public
-    String toString ()
+    String toString()
     {
         if ( this.forum == null )
         {
-            return String.format ( "Je suis %s %s. J'ai %d et je suis %s et je n'ai pas de forum.", prenom, nom, age,
-                                   grade.toString () );
+            return String.format( "Je suis %s %s. J'ai %d et je suis %s et je n'ai pas de forum.", prenom, nom, age,
+                                  grade.toString() );
         }
         else
         {
-            return String.format ( "Je suis %s %s. J'ai %d et je suis %s sur le forum %s.", prenom, nom, age,
-                                   grade.toString (), forum.getNom () );
+            return String.format( "Je suis %s %s. J'ai %d et je suis %s sur le forum %s.", prenom, nom, age,
+                                  grade.toString(), forum.getNom() );
         }
     }
 
@@ -118,12 +118,13 @@ class Abonne extends Personne
      *
      * @param titre Le titre de la nouvelle
      * @param texte Le contenu de la nouvelle
+     *
      * @return
      */
     protected
-    Nouvelle creerNouvelle ( String titre, String texte )
+    Nouvelle creerNouvelle( String titre, String texte )
     {
-        return new Nouvelle ( titre, texte, this );
+        return new Nouvelle( titre, texte, this );
     }
 
     /**
@@ -132,11 +133,11 @@ class Abonne extends Personne
      * @param nouvelle La nouvelle à ajouter au forum
      */
     protected
-    void deposerNouvelle ( Nouvelle nouvelle )
+    void deposerNouvelle( Nouvelle nouvelle )
     {
         if ( this.forum != null )
         {
-            forum.ajouterNouvelle ( nouvelle );
+            forum.ajouterNouvelle( nouvelle );
         }
     }
 
@@ -146,12 +147,11 @@ class Abonne extends Personne
      * @param index
      */
     protected
-    void lireNouvelle ( int index )
+    void lireNouvelle( int index )
     {
         if ( this.forum != null )
         {
-            informativeWindow ( forum.consulterNouvelle ( index ).toString (),
-                                String.format ( "article n°%d%n", index ) );
+            informativeWindow( forum.consulterNouvelle( index ).toString(), String.format( "article n°%d%n", index ) );
         }
     }
 
@@ -161,12 +161,12 @@ class Abonne extends Personne
      * @param nouvelle La nouvelle à laquel on souhaite répondre
      */
     protected
-    void repondreNouvelle ( Nouvelle nouvelle )
+    void repondreNouvelle( Nouvelle nouvelle )
     {
         if ( this.forum != null )
         {
-            int index = forum.getIndex ( nouvelle );
-            forum.repondreNouvelle ( index, this );
+            int index = forum.getIndex( nouvelle );
+            forum.repondreNouvelle( index, this );
         }
     }
 }

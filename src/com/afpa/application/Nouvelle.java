@@ -25,12 +25,12 @@ class Nouvelle
      * @param auteur L'auteur de la nouvelle
      */
     protected
-    Nouvelle ( String sujet, String texte, Personne auteur )
+    Nouvelle( String sujet, String texte, Personne auteur )
     {
         this.sujet        = sujet;
         this.texte        = texte;
         this.auteur       = auteur;
-        this.dateCreation = new Date ();
+        this.dateCreation = new Date();
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -48,10 +48,10 @@ class Nouvelle
      */
     @Override
     public
-    String toString ()
+    String toString()
     {
-        return String.format ( "-------------------%ntitre : '%s'%nnouvelle : %s%nauteur : %s%n-------------------%n",
-                               sujet, texte, auteur.toStringShort () );
+        return String.format( "-------------------%ntitre : '%s'%nnouvelle : %s%nauteur : %s%n-------------------%n",
+                              sujet, texte, auteur.toStringShort() );
     }
 
     /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */

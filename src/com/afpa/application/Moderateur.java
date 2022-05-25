@@ -25,10 +25,10 @@ class Moderateur extends Personne
      * @param forum  Le forum à assigner au moderateur
      */
     protected
-    Moderateur ( String prenom, String nom, int age, Forum forum )
+    Moderateur( String prenom, String nom, int age, Forum forum )
     {
-        super ( prenom, nom, age );
-        setForum ( forum );
+        super( prenom, nom, age );
+        setForum( forum );
         this.grade = Grade.MODERATEUR;
     }
 
@@ -61,7 +61,7 @@ class Moderateur extends Personne
      * @param forum Le forum à assigner à l'objet modérateur
      */
     protected
-    void setForum ( Forum forum )
+    void setForum( Forum forum )
     {
         this.forum = forum;
     }
@@ -77,17 +77,17 @@ class Moderateur extends Personne
      */
     @Override
     public
-    String toString ()
+    String toString()
     {
         if ( this.forum == null )
         {
-            return String.format ( "Je suis %s %s. J'ai %d et je suis %s et je nouvelle'ai pas de forum.", prenom, nom,
-                                   age, grade.toString () );
+            return String.format( "Je suis %s %s. J'ai %d et je suis %s et je nouvelle'ai pas de forum.", prenom, nom,
+                                  age, grade.toString() );
         }
         else
         {
-            return String.format ( "Je suis %s %s. J'ai %d et je suis %s sur le forum %s.", prenom, nom, age,
-                                   grade.toString (), forum.getNom () );
+            return String.format( "Je suis %s %s. J'ai %d et je suis %s sur le forum %s.", prenom, nom, age,
+                                  grade.toString(), forum.getNom() );
         }
     }
 
@@ -99,16 +99,17 @@ class Moderateur extends Personne
      * Ajouter un abonné au forum du modérateur
      *
      * @param abonne L'abonné à ajouter au forum du modérateur
+     *
      * @return
      */
     protected
-    int ajouterAbonne ( Abonne abonne )
+    int ajouterAbonne( Abonne abonne )
     {
         if ( this.forum != null )
         {
-            return forum.ajouterAbonne ( abonne );
+            return forum.ajouterAbonne( abonne );
         }
-        return -1;
+        return - 1;
     }
 
     /**
@@ -117,11 +118,11 @@ class Moderateur extends Personne
      * @param abonne L'abonné à avertir sur le forum du modérateur
      */
     protected
-    void avertirAbonne ( Abonne abonne )
+    void avertirAbonne( Abonne abonne )
     {
         if ( this.forum != null )
         {
-            forum.avertirUnAbonne ( abonne );
+            forum.avertirUnAbonne( abonne );
         }
     }
 
@@ -131,11 +132,11 @@ class Moderateur extends Personne
      * @param abonne L'abonné à exclure au forum du modérateur
      */
     protected
-    void exclureAbonne ( Abonne abonne )
+    void exclureAbonne( Abonne abonne )
     {
         if ( this.forum != null )
         {
-            forum.bannirUnAbonne ( abonne );
+            forum.bannirUnAbonne( abonne );
         }
     }
 
@@ -145,11 +146,11 @@ class Moderateur extends Personne
      * @param nouvelle La nouvelle à supprimer du forum
      */
     protected
-    void supprimerNouvelle ( Nouvelle nouvelle )
+    void supprimerNouvelle( Nouvelle nouvelle )
     {
         if ( this.forum != null )
         {
-            forum.supprimerNouvelle ( nouvelle );
+            forum.supprimerNouvelle( nouvelle );
         }
     }
 
@@ -157,11 +158,11 @@ class Moderateur extends Personne
      * Afficher une liste des abonnés
      */
     protected
-    void afficherLesAbonnes ()
+    void afficherLesAbonnes()
     {
         if ( this.forum != null )
         {
-            forum.listerAbonnes ();
+            forum.listerAbonnes();
         }
     }
 }
